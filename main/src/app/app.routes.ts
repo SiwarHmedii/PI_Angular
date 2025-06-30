@@ -1,128 +1,38 @@
 import { Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
-
-import { ProjetComponent } from './pages/admin/projet/projet.component';
-import {ProjetDetailComponent} from './pages/admin/projet/projet-detail.component';
-import {SprintEtudiantsComponent} from './pages/admin/sprint/sprint-etudiants.component'
-
+import { EntrepriseListComponent } from './pages/ui-components/AdminUI/entreprise-list/entreprise-list.component';
+import { EventListComponent} from './pages/ui-components/AdminUI/events-list/event-list.component';
+import { EditEventDialogComponent} from './pages/ui-components/AdminUI/events-list/EditEventDialogComponent';
+import { EncadrantComponent} from './pages/ui-components/AdminUI/Encadrant/encadrant.component';
+import { OffreComponent} from './pages/ui-components/AdminUI/Offre PFE/offre.component';
+import { EntrepriseViewComponent} from './pages/ui-components/EntrepriseUI/DashboardEntreprise/entreprise-view.component';
+import { EntrepriseProfileComponent} from './pages/ui-components/EntrepriseUI/MyProfile/entreprise-profile.component';
+import {AdminProfileComponent} from './pages/ui-components/AdminUI/AdminView/admin-view.component';
+import {EntrepriseOffresComponent} from './pages/ui-components/EntrepriseUI/MyPFE/entreprise-offres.component';
+import {EventEntrepriseComponent} from './pages/ui-components/EntrepriseUI/MyEvents/entreprise-event-dashboard.component';
+import {EntrepriseEncadrantComponent} from './pages/ui-components/EntrepriseUI/MyEncadrant/encadrant.component';
+import {StudentViewComponent} from './pages/ui-components/EtudiantUI/StudentView/student-view.component';
 import { AuthGuard } from './services/auth.guard';
-import { ProjetFormComponent } from './pages/admin/projet/form.component';
-import {SprintListComponent} from './pages/admin/sprint/sprint-list.component';
-import { SprintFormComponent } from './pages/admin/sprint/sprint-form.component';
-import { SprintDetailsComponent} from './pages/admin/sprint/sprint-details.component'
-import { ListtacheComponent } from './pages/admin/tache/listtache.component';
-import { TacheFormAdminComponent } from './pages/admin/tache/tache-form-admin.component';
-import { TacheDetailsComponent } from './pages/admin/tache/tachedetail.component';
-import { AddEvaluationComponent } from './pages/add-evaluation/add-evaluation.component';
-import { EvaluationComponent } from './pages/evaluation/evaluation.component';
-import { NoteComponent } from './pages/note/note.component';
-import { AfficherNotesComponent } from './pages/afficher-notes/afficher-notes.component';
-import {MoyenneComponent} from "./pages/moyenne/moyenne.component";
-
-
-
-
+import {
+  CandidatureManagementComponent
+} from "./pages/ui-components/EntrepriseUI/Candidatures/candidature-management.component";
+import {StudentOffreComponent} from "./pages/ui-components/EtudiantUI/Student - OffrePFE/student-offre.component";
+import {StudentEventComponent} from "./pages/ui-components/EtudiantUI/Student-Events/student-event.component";
+import {
+  AdzunaDashboardComponent,
+} from "./pages/ui-components/EtudiantUI/JobMarketDashboard/adzuna-job-market.component";
 export const routes: Routes = [
   {
     path: '',
     component: FullComponent,
-    canActivate: [AuthGuard],
+
     children: [
       {
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full',
       },
-      {
-        path: 'projet',
-        component :ProjetComponent,
-      },
-      {
-        path: 'projet/form',
-        component: ProjetFormComponent,
-      },
-      {
-        path: 'projet/form/:id',
-        component: ProjetFormComponent,
-      },
-      {
-        path: 'projet/detail/:id',
-        component: ProjetDetailComponent,
-      },
-      {
-        path: 'sprints/details/:id',
-        component: SprintDetailsComponent,
-      },
-
-      {
-        path: 'sprints',
-        component: SprintListComponent,
-      },
-      {
-        path: 'sprints/add',
-        component: SprintFormComponent,
-      },
-
-      {
-        path: 'sprints/:id/edit',
-        component: SprintFormComponent,
-      },
-      {
-        path: 'sprints/:id/etudiants/manage',
-        component: SprintEtudiantsComponent,
-      },
-      {
-        path: 'taches',
-        component: ListtacheComponent,
-      },
-      {
-        path: 'taches/add',
-        component: TacheFormAdminComponent,
-      },
-      {
-       path: 'taches/edit/:id',
-        component: TacheFormAdminComponent,
-      },
-      {
-        path: 'taches/details/:id',
-        component: TacheDetailsComponent,
-      },
-
-      {
-        path: 'evaluation',
-        component: EvaluationComponent,
-      },
-
-      {
-        path: 'note',
-        component: NoteComponent,
-      },
-      {
-      path: 'moyenne',
-  component: MoyenneComponent,
-},
-
-      {
-        path: 'afficher-notes',
-        component: AfficherNotesComponent,
-      },
-
-
-      /* The code snippet you provided is defining the routing configuration for an Angular application. */
-
-
-
-      {
-        path: 'add-evaluation/:idProjet',
-        component: AddEvaluationComponent,
-      },
-
-
-
-
-
-
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -140,24 +50,6 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
       },
-      {
-        path: 'reunions',
-        loadChildren: () =>
-          import('./pages/reunions/reunions.routes').then((m) => m.ReunionsRoutes),
-      },
-
-      {
-        path: 'salles',
-        loadChildren: () =>
-          import('./pages/salles/salles.routes').then((m) => m.SallesRoutes),
-      },
-
-      {
-        path: 'participants',
-        loadChildren: () =>
-          import('./pages/participants/participants.routes').then((m) => m.ParticipantsRoutes),
-      },
-
     ],
   },
   {
@@ -177,4 +69,20 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'authentication/error',
   },
+  { path: 'admin/entreprises', component: EntrepriseListComponent },
+  { path: 'admin/evenements', component: EventListComponent },           // Event List
+  { path: 'admin/evenements/edit/:id', component: EditEventDialogComponent },
+  { path: 'admin/encadrant', component: EncadrantComponent },
+  { path: 'admin/offres', component: OffreComponent },
+  { path: 'entreprise/dashboard', component: EntrepriseViewComponent },
+  {path: 'entreprise/profile', component: EntrepriseProfileComponent },
+  {path: 'admin/profile', component: AdminProfileComponent},
+  {path: 'entreprise/offres', component: EntrepriseOffresComponent},
+  {path: 'entreprise/events', component: EventEntrepriseComponent},
+  {path: 'entreprise/encadrants', component:  EntrepriseEncadrantComponent},
+  {path: 'entreprise/candidatures', component:    CandidatureManagementComponent},
+  {path: 'student/dashboard', component:  StudentViewComponent},
+  {path: 'student/offres', component:  StudentOffreComponent},
+  {path: 'student/events', component:  StudentEventComponent},
+  {path: 'student/JobMarket', component:  AdzunaDashboardComponent}
 ];

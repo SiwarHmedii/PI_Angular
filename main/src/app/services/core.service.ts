@@ -1,7 +1,5 @@
 import { Injectable, signal } from '@angular/core';
 import { AppSettings, defaults } from '../config';
-import { BehaviorSubject } from 'rxjs';
-
 
 @Injectable({
     providedIn: 'root',
